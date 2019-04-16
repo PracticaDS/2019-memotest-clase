@@ -8,6 +8,7 @@ import { Button, Welcome } from '@storybook/react/demo';
 import { Ficha } from '../components/Ficha';
 import { Tablero } from '../components/Tablero';
 
-storiesOf('Ficha', module).add('Normal', () => <Ficha contenido="😀" />);
+storiesOf('Ficha', module).add('Normal', () => <Ficha 
+contenido="😀" alDarseVuelta={action("Dar vuelta")} />);
 storiesOf('Tablero', module)
 .add('Normal', () => <Tablero contenidos={["💩", "🤡", "👹", "👻", "👽", "👾"]} />);

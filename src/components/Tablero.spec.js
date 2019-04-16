@@ -4,8 +4,6 @@ import React from 'react';
 import { Tablero } from './Tablero';
 
 describe("Tablero", () => {
-
-
   it("deberia tener una cantidad de fichas pares", () => {
     const contenidos = ["💩", "🤡", "👹", "👻", "👽", "👾"];
     
