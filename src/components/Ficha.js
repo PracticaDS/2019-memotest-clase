@@ -1,6 +1,7 @@
 import React from 'react';
 
 import "./Ficha.css"
+import PropTypes from 'prop-types';
 
 export class Ficha extends React.Component {
   
@@ -21,4 +22,12 @@ export class Ficha extends React.Component {
       return <div onClick={this.darVuelta.bind(this)} className="ficha bocaAbajo"></div>;
     }
   }
+}
+
+Ficha.propTypes = {
+  bocaArriba: PropTypes.bool
+}
+
+Ficha.defaultProps = {
+  bocaArriba: false
 }
