@@ -10,4 +10,15 @@ describe("Tablero", () => {
     const tablero = mount(<Tablero contenidos={contenidos} />)
     expect(tablero.find(Ficha).length).toEqual(contenidos.length * 2);
   })
+
+  it("deberia guardar fichas seleccionadas", () => {
+    const contenidos = ["💩", "🤡", "👹", "👻", "👽", "👾"];
+    
+    const tablero = mount(<Tablero contenidos={contenidos} />);
+    const ficha = tablero.find(Ficha).at(0);
+
+    ficha.simulate("click");
+
+    expect(tablero.state("contenidosSeleccionados")).toEqual([ficha.prop("contenido")]);
+  })
 });

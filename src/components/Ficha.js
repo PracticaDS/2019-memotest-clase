@@ -11,12 +11,11 @@ export class Ficha extends React.Component {
   }
 
   darVuelta() {
-    this.setState({bocaArriba: !this.state.bocaArriba})
-    if(this.props.alDarseVuelta) {
-      this.props.alDarseVuelta({
-        contenido: this.props.contenido,
-        bocaArriba: this.state.bocaArriba
-      })
+    if(!this.state.bocaArriba) {
+      this.setState({bocaArriba: true})
+      if(this.props.alDarseVuelta) {
+        this.props.alDarseVuelta(this.props.contenido)
+      }
     }
   }
 

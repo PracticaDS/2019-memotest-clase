@@ -1,20 +1,41 @@
 import React from 'react';
 import { Ficha } from './Ficha';
 
-//TODO: Manejar el estado de las fichas aquí
-export function Tablero(props) {
-  const contenidosMezclados = 
-    props.contenidos.concat(props.contenidos);
+export class Tablero extends React.Component {
 
-  //TODO: Falta agregar shuffle para contenidos mezclados
+  constructor(props) {
+    super(props);
+    //TODO: Falta agregar shuffle para contenidos mezclado
+    this.state = {
+      contenidosMezclados:
+        props.contenidos.concat(props.contenidos),
+      contenidosSeleccionados: []
+    };
+  }
 
-  const fichas = contenidosMezclados.map(
-    (unContenido, index) => <Ficha 
-      alDarseVuelta={(contenido) => 
-        console.log("ficha dada vuelta: " + contenido)}
-      key={index} 
-      contenido={unContenido} />
-  );
+  isBocaArriba(unContenido) {
+    return this.state.contenidosSeleccionados.indexOf(unContenido) != -1;
+  }
 
-  return <div>{fichas}</div>
+  seleccionarContenido(unContenidoSeleccionado) {
+    this.setState({
+      ...this.state,
+      contenidosSeleccionados:
+        this.state.contenidosSeleccionados.concat(
+          unContenidoSeleccionado)
+    })
+  }
+
+  render() {
+    const fichas = this.state.contenidosMezclados.map(
+      (unContenido, index) => <Ficha
+        alDarseVuelta={this.seleccionarContenido.bind(this)}
+        key={index}
+        bocaArriba={this.isBocaArriba(unContenido)}
+        contenido={unContenido} />
+    );
+
+    return <div>{fichas}</div>
+  }
+
 }
