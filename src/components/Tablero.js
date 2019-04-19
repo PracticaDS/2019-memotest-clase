@@ -10,21 +10,31 @@ export class Tablero extends React.Component {
     super(props);
     this.state = {
       contenidosMezclados: _.shuffle(props.contenidos.concat(props.contenidos)),
-      contenidosSeleccionados: []
+      fichasActuales: [],
+      fichasBocaArriba: []
     };
   }
 
-  isBocaArriba(unContenido) {
-    return _.includes(this.state.contenidosSeleccionados, unContenido);
+  isBocaArriba(unaFicha) {
+    return _.includes(this.state.fichasBocaArriba, unaFicha);
   }
 
-  seleccionarContenido(unContenidoSeleccionado) {
+  procesarParDeFichas(ficha) {
+    const potencialPar = this.state.fichasActuales.concat(ficha);
+    if(potencialPar.length === 2) {
+      //TODO: Procesar par
+      return []
+    } else {
+      return potencialPar
+    }
+  }
+
+  seleccionarFicha(contenido, ficha) {    
     this.setState({
       ...this.state,
-      contenidosSeleccionados:
-        this.state.contenidosSeleccionados.concat(
-          unContenidoSeleccionado)
-    })
+      fichasBocaArriba: this.state.fichasBocaArriba.concat(ficha),
+      fichasActuales: this.procesarParDeFichas(ficha)
+    });  
   }
 
   calculateStyle() {
@@ -34,9 +44,10 @@ export class Tablero extends React.Component {
   render() {
     const fichas = this.state.contenidosMezclados.map(
       (unContenido, index) => <Ficha
-        alDarseVuelta={this.seleccionarContenido.bind(this)}
+        alDarseVuelta={this.seleccionarFicha.bind(this)}
+        id={index}
         key={index}
-        bocaArriba={this.isBocaArriba(unContenido)}
+        bocaArriba={this.isBocaArriba(index)}
         contenido={unContenido} />
     );
     

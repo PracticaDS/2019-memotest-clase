@@ -13,7 +13,7 @@ export class Ficha extends React.Component {
   darVuelta() {
     this.setState({bocaArriba: true})
     if(this.props.alDarseVuelta) {
-      this.props.alDarseVuelta(this.props.contenido)
+      this.props.alDarseVuelta(this.props.contenido, this.props.id)
     }
   }
 
@@ -28,7 +28,8 @@ export class Ficha extends React.Component {
 
 Ficha.propTypes = {
   bocaArriba: PropTypes.bool,
-  alDarseVuelta: PropTypes.func
+  alDarseVuelta: PropTypes.func,
+  id: PropTypes.number
 }
 
 Ficha.defaultProps = {

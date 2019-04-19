@@ -14,13 +14,13 @@ describe("fichas", () => {
   it("deberia darse vuelta al hacer click", () => {
     var contenidoDadoVuelta;
 
-    const ficha = mount(<Ficha contenido="🤡" alDarseVuelta={(contenido) => contenidoDadoVuelta = contenido}/>);
+    const ficha = mount(<Ficha id={1} contenido="🤡" alDarseVuelta={(contenido, key) => contenidoDadoVuelta = [contenido, key]}/>);
     
     ficha.simulate("click");
     
     expect(ficha.state("bocaArriba")).toBe(true);
     expect(ficha.find("div.ficha").hasClass("bocaAbajo")).toBe(false);
 
-    expect(contenidoDadoVuelta).toEqual(ficha.prop("contenido"));
+    expect(contenidoDadoVuelta).toEqual([ficha.prop("contenido"), ficha.prop("id")]);
   })
 });
