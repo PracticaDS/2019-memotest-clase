@@ -1,14 +1,13 @@
 import React from 'react';
 import { Ficha } from './Ficha';
+import _ from 'lodash';
 
 export class Tablero extends React.Component {
 
   constructor(props) {
     super(props);
-    //TODO: Falta agregar shuffle para contenidos mezclado
     this.state = {
-      contenidosMezclados:
-        props.contenidos.concat(props.contenidos),
+      contenidosMezclados: _.shuffle(props.contenidos.concat(props.contenidos)),
       contenidosSeleccionados: []
     };
   }
