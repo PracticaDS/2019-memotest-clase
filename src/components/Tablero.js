@@ -11,21 +11,44 @@ export class Tablero extends React.Component {
     this.state = {
       contenidosMezclados: _.shuffle(props.contenidos.concat(props.contenidos)),
       fichasActuales: [],
-      fichasBocaArriba: []
+      fichasBocaArriba: [],
+      paresEncontrados: []
     };
   }
 
   isBocaArriba(unaFicha) {
-    return _.includes(this.state.fichasBocaArriba, unaFicha);
+    return _.includes(this.state.fichasBocaArriba, unaFicha);;
   }
 
-  procesarParDeFichas(ficha) {
+  contenidoDe(ficha) {
+    return this.state.contenidosMezclados[ficha];
+  }
+
+  ponerBocaAbajo(parDeFichas) {
+    this.setState({
+      ...this.state,
+      fichasBocaArriba: this.state.fichasBocaArriba.filter(it => !_.includes(parDeFichas, it))
+    })
+  }
+
+  procesarPar(parDeFichas) {
+    if(this.contenidoDe(parDeFichas[0]) === this.contenidoDe(parDeFichas[1])) {
+      return [...this.state.paresEncontrados, parDeFichas];
+    } else {
+      setTimeout(() => this.ponerBocaAbajo(parDeFichas), 2000)
+      return this.state.paresEncontrados;
+    }
+  }
+
+  agregarAParDeFichas(ficha) {
     const potencialPar = this.state.fichasActuales.concat(ficha);
     if(potencialPar.length === 2) {
-      //TODO: Procesar par
-      return []
+      return {
+        paresEncontrados: this.procesarPar(potencialPar),
+        fichasActuales: []
+      }
     } else {
-      return potencialPar
+      return {fichasActuales: potencialPar}
     }
   }
 
@@ -33,7 +56,7 @@ export class Tablero extends React.Component {
     this.setState({
       ...this.state,
       fichasBocaArriba: this.state.fichasBocaArriba.concat(ficha),
-      fichasActuales: this.procesarParDeFichas(ficha)
+      ...this.agregarAParDeFichas(ficha)
     });  
   }
 

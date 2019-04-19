@@ -37,6 +37,18 @@ describe("Tablero", () => {
     expect(tablero.state("fichasActuales")).toEqual([]);
     expect(tablero.state("fichasBocaArriba")).toEqual([ficha1.prop("id"), ficha2.prop("id")]);
   })
+
+  it("deberia guardar un par encontrado", () => {
+    const tablero = crearTablero(["🤡"]);
+    
+    const ficha1 = tablero.find(Ficha).at(0);
+    const ficha2 = tablero.find(Ficha).at(1);
+    
+    ficha1.simulate("click");
+    ficha2.simulate("click");
+
+    expect(tablero.state("paresEncontrados")).toEqual([[ficha1.prop("id"), ficha2.prop("id")]]);
+  })
 });
 
 
