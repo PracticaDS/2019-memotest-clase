@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Ficha } from './components/Ficha';
+import { Tablero } from './components/Tablero';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-           
-          <div>
-            <Ficha contenido="🦁" />
-            <Ficha contenido="🦁" />
-            <Ficha contenido="🦁" />
-          </div>
+          <h1>Small Memotest</h1>
+          <Tablero columnas={4} contenidos={["🤡","👹","👻","👽","👾","🤖","😺","🙊"]} onCompletado={() => window.alert("Ganaste!!")} />
         </header>
       </div>
     );

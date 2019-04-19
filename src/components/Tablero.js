@@ -33,7 +33,13 @@ export class Tablero extends React.Component {
 
   procesarPar(parDeFichas) {
     if(this.contenidoDe(parDeFichas[0]) === this.contenidoDe(parDeFichas[1])) {
-      return [...this.state.paresEncontrados, parDeFichas];
+      const nuevosParesEncontrados = [...this.state.paresEncontrados, parDeFichas];
+      
+      if(nuevosParesEncontrados.length === this.props.contenidos.length && _.isFunction(this.props.onCompletado)) {
+        this.props.onCompletado.call(nuevosParesEncontrados);
+      }
+
+      return nuevosParesEncontrados;
     } else {
       setTimeout(() => this.ponerBocaAbajo(parDeFichas), 2000)
       return this.state.paresEncontrados;
