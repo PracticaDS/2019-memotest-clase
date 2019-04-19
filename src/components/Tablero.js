@@ -1,6 +1,8 @@
 import React from 'react';
 import { Ficha } from './Ficha';
 import _ from 'lodash';
+import './Tablero.css'
+import { PropTypes } from 'prop-types';
 
 export class Tablero extends React.Component {
 
@@ -13,7 +15,7 @@ export class Tablero extends React.Component {
   }
 
   isBocaArriba(unContenido) {
-    return this.state.contenidosSeleccionados.indexOf(unContenido) != -1;
+    return _.includes(this.state.contenidosSeleccionados, unContenido);
   }
 
   seleccionarContenido(unContenidoSeleccionado) {
@@ -25,6 +27,10 @@ export class Tablero extends React.Component {
     })
   }
 
+  calculateStyle() {
+    return {gridTemplateColumns: `repeat(${this.props.columnas}, fit-content(120px))`};
+  }
+
   render() {
     const fichas = this.state.contenidosMezclados.map(
       (unContenido, index) => <Ficha
@@ -33,8 +39,16 @@ export class Tablero extends React.Component {
         bocaArriba={this.isBocaArriba(unContenido)}
         contenido={unContenido} />
     );
-
-    return <div>{fichas}</div>
+    
+    return <div style={this.calculateStyle()} className="tablero">{fichas}</div>
   }
+}
 
+Tablero.propTypes = {
+  contenidos: PropTypes.array,
+  columnas: PropTypes.number
+}
+
+Tablero.defaultProps = {
+  columnas: 3
 }

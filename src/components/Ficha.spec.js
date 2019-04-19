@@ -12,11 +12,15 @@ describe("fichas", () => {
   })
 
   it("deberia darse vuelta al hacer click", () => {
-    const ficha = mount(<Ficha contenido="🤡" />)
+    var contenidoDadoVuelta;
+
+    const ficha = mount(<Ficha contenido="🤡" alDarseVuelta={(contenido) => contenidoDadoVuelta = contenido}/>);
     
-    ficha.simulate("click")
+    ficha.simulate("click");
     
     expect(ficha.state("bocaArriba")).toBe(true);
     expect(ficha.find("div.ficha").hasClass("bocaAbajo")).toBe(false);
+
+    expect(contenidoDadoVuelta).toEqual(ficha.prop("contenido"));
   })
 });
