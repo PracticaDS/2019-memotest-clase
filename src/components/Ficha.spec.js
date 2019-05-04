@@ -8,7 +8,7 @@ describe("fichas", () => {
   it("deberia estar boca abajo al crearse", () => {
     const ficha = mount(<Ficha contenido="🤡" />)
     expect(ficha.prop("bocaArriba")).toBe(false);
-    expect(ficha.find("div.ficha").hasClass("bocaAbajo")).toBe(true);
+    expect(ficha.find("div.ficha").hasClass("boca-abajo")).toBe(true);
   })
 
   it("deberia no tener la clase boca abajo al estar boca arriba", () => {
