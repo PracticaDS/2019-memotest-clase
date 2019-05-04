@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Ficha } from './components/Ficha';
 import { Tablero } from './components/Tablero';
 
 class App extends Component {

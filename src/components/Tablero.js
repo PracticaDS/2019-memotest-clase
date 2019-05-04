@@ -70,12 +70,17 @@ export class Tablero extends React.Component {
     return {gridTemplateColumns: `repeat(${this.props.columnas}, fit-content(120px))`};
   }
 
+  isResuelta(index) {
+    return _.flatten(this.state.paresEncontrados).includes(index)
+  }
+
   render() {
     const fichas = this.state.contenidosMezclados.map(
       (unContenido, index) => <Ficha
         alDarseVuelta={this.seleccionarFicha.bind(this)}
         id={index}
         key={index}
+        resuelta={this.isResuelta(index)}
         bocaArriba={this.isBocaArriba(index)}
         contenido={unContenido} />
     );

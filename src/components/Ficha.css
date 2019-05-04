@@ -11,6 +11,10 @@
     background-color: lightsalmon;
 }
 
-.ficha.bocaAbajo {
+.ficha.boca-abajo {
     background-color: #444444;
+}
+
+.ficha.resuelta {
+    background-color: gold;
 }
